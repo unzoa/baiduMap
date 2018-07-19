@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="container"></div> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=iOTNCSGGr60GsufMjhl7FbhIYQp68gja"></script>
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script> 
+<script type="text/javascript">
+	var longitude, latitude;
+	navigator.geolocation.getCurrentPosition(function (position) {  
+        longitude = position.coords.longitude;  
+        latitude = position.coords.latitude;  
+
+		var map = new BMap.Map("allmap");      
+		
+		var gpsPoint = new BMap.Point(longitude, latitude);  
+	    BMap.Convertor.translate(gpsPoint, 0, function (point) {  
+	        var geoc = new BMap.Geocoder();  
+	        geoc.getLocation(point, function (rs) {  
+	            var addComp = rs.addressComponents;  
+	            alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);  
+	        });  
+	    });  
+
+	}); 
+ 
+</script>
+</body>
+</html>
